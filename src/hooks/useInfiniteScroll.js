@@ -10,7 +10,7 @@
 //       <div ref={sentinelRef} />
 //     </>
 //   );
-//
+///
 import { useEffect, useRef } from 'react';
 
 const useInfiniteScroll = ({

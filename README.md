@@ -31,6 +31,22 @@ Expects the backend at `http://localhost:8080` (see `API_BASE_URL` in
 - `src/hooks/useInfiniteScroll.js` + `src/reusable/CustomInfiniteScroll.jsx`
   — a scroll-based lazy-loading alternative to `CustomPagination`, not
   currently wired into either page but available if a future list wants it.
+- `src/auth/` — real login/register (`AuthContext.jsx`/`useAuth.js`,
+  `RequireAuth.jsx`, `session.js`), gated by `AUTH_ENABLED` in
+  `apiConfig.js` (default `false`). See below.
+
+## Real login (`AUTH_ENABLED` in `apiConfig.js`, default `false`)
+
+Off by default: no `/login` link in the nav, `/customers`/`/bookings`
+render exactly as before, mutating requests still use the dev-token flow in
+`authToken.js`. Flip `AUTH_ENABLED` to `true` (and set
+`app.security.auth.enabled=true` on the backend — see its README, this only
+works when both sides agree) to require a real login: `/customers` and
+`/bookings` redirect to `/login` when nobody's signed in, the nav shows the
+logged-in user + a Log Out button, and mutating requests use that user's
+token instead of a dev one. `src/auth/session.js` is the single source of
+truth (localStorage-backed) that both the React side (`AuthContext.jsx`) and
+the plain-module API layer (`apiClient.js`) read from.
 
 ## Adapting this for a real test topic
 

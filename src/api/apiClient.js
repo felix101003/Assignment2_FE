@@ -1,7 +1,8 @@
 // Shared fetch wrapper for every backend call — JSON in/out, query string
-// building, and attaching the dev bearer token on mutating requests.
-import { API_BASE_URL } from '../config/apiConfig'
+// building, and attaching a bearer token on mutating requests.
+import { API_BASE_URL, AUTH_ENABLED } from '../config/apiConfig'
 import { getDevToken } from './authToken'
+import { getSession } from '../auth/session'
 
 function toQueryString(params = {}) {
     const query = new URLSearchParams()
@@ -18,7 +19,10 @@ export default async function apiRequest(path, { method = 'GET', body, params } 
     const headers = { 'Content-Type': 'application/json' }
 
     if (method !== 'GET') {
-        const token = await getDevToken()
+        // AUTH_ENABLED off (default): unchanged dev-token flow. On: use the real
+        // logged-in user's token instead — null if nobody's logged in yet, which
+        // just means the request 401s and RequireAuth sends them to /login.
+        const token = AUTH_ENABLED ? getSession()?.token : await getDevToken()
         if (token) headers.Authorization = `Bearer ${token}`
     }
 

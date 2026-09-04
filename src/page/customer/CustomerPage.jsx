@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { customerApi } from '../../api/customerApi';
 import { CUSTOMER_ROLES } from '../../config/apiConfig';
+// import { initialsAvatar } from '../../utils/avatar'; // offline-safe alternative to the pravatar.cc call below
 import CustomAlert from '../../reusable/CustomAlert';
 import CustomBadge from '../../reusable/CustomBadge';
 import CustomButton from '../../reusable/CustomButton';
@@ -124,6 +125,25 @@ const CustomerPage = () => {
 
     // TODO(real-topic): one column per field worth showing in the table.
     const columns = [
+        {
+            // TODO(real-topic): no image field exists on the backend yet — this is a
+            // deterministic placeholder (same id -> same picture) standing in for one.
+            // Swap `src` for the real field (e.g. row.avatarUrl/row.photoUrl) once it exists.
+            header: '',
+            key: 'avatar',
+            width: '80px',
+            render: (row) => (
+                // Hits pravatar.cc over the network — breaks (broken-image icon) with no
+                // internet. Offline-safe alternative already written in src/utils/avatar.js:
+                // src={initialsAvatar(`${row.firstName} ${row.lastName}`, row.id)}
+                <img
+                    src={`https://i.pravatar.cc/64?u=${row.id}`}
+                    alt=""
+                    className="w-10 h-10 rounded-full object-cover bg-gray-100"
+                    loading="lazy"
+                />
+            ),
+        },
         { header: 'Name', key: 'name', render: (row) => `${row.firstName} ${row.lastName}` },
         { header: 'Email', key: 'email' },
         { header: 'Phone', key: 'phone', render: (row) => row.phone || '—' },

@@ -56,7 +56,6 @@ const HomePage = () => {
         { id: 11, name: 'CustomSpinner', desc: 'Loading indicator with optional full-screen mode', status: 'Ready' },
         { id: 12, name: 'CustomCard', desc: 'Content card with title, body, and footer', status: 'Ready' },
         { id: 13, name: 'CustomBadge', desc: 'Status tags for labels and table states', status: 'Ready' },
-        { id: 14, name: 'Redux Cart Integration', desc: 'Global cart drawer with add/remove/increment', status: 'Ready' },
     ];
 
     const totalPages = Math.ceil(tableData.length / PAGE_SIZE);
@@ -130,14 +129,23 @@ const HomePage = () => {
             <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white rounded-2xl p-8 shadow-lg">
                 <h1 className="text-3xl font-extrabold tracking-tight">Assessment Template Sandbox</h1>
                 <p className="text-blue-105 mt-2 max-w-2xl">
-                    A reference playground configured with Tailwind CSS v4, React Router, Redux Toolkit, backend HTTP helpers, and pre-built components.
+                    A reference playground configured with Tailwind CSS v4, React Router, backend HTTP helpers, and pre-built components.
                 </p>
+                {/* TODO(real-topic): these two CTAs point at the template's example
+                    routes — update alongside RouteConfig.jsx/NavBar.jsx. The rest of
+                    this page is a generic component showcase and doesn't need to change. */}
                 <div className="flex gap-4 mt-6">
                     <a
-                        href="/products"
+                        href="/customers"
                         className="bg-white text-blue-700 font-semibold px-5 py-2.5 rounded-lg shadow hover:bg-blue-50 no-underline transition-all cursor-pointer"
                     >
-                        Go to Product Shop
+                        Go to Customers
+                    </a>
+                    <a
+                        href="/bookings"
+                        className="bg-blue-500 text-white font-semibold px-5 py-2.5 rounded-lg shadow hover:bg-blue-400 no-underline transition-all cursor-pointer"
+                    >
+                        Go to Bookings
                     </a>
                 </div>
             </div>

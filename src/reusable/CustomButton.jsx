@@ -17,7 +17,7 @@ const CustomButton = ({
     const variants = {
         primary: "bg-blue-600 hover:bg-blue-700 text-white focus:ring-blue-500 shadow-sm",
         secondary: "bg-gray-200 hover:bg-gray-300 text-gray-800 focus:ring-gray-400",
-        danger: "bg-red-650 hover:bg-red-700 text-white focus:ring-red-500 shadow-sm",
+        danger: "bg-red-600 hover:bg-red-700 text-white focus:ring-red-500 shadow-sm",
         outline: "border border-gray-300 bg-transparent hover:bg-gray-50 text-gray-700 focus:ring-blue-500",
         ghost: "bg-transparent hover:bg-gray-150 text-gray-700 focus:ring-gray-350"
     };
